@@ -1,17 +1,13 @@
 <template>
   <ul class="ins-list" :class="label">
-    <li v-for="(name, index) in imagesList" class="ins-item" :key="name">
+    <li v-for="(item, index) in imagesList" class="ins-item" :key="item.name">
       <img
         class="ins-gray"
-        :src="
-          import(`../../../assets/images/musicParty2020/stage/ins_${name}@2x.png`)
-        "
+        :src="item.src"
       />
       <img
-        v-show="!exclude.some((item) => item === name)"
-        :src="
-          import(`../../../assets/images/musicParty2020/stage/ins_${name}@2x.png`)
-        "
+        v-show="!exclude.some((val) => val === item.name)"
+        :src="item.src"
         @touchstart="touchStart(index, $event)"
         @touchmove="touchMove(index, $event)"
         @touchend="touchEnd(index, $event)"
@@ -29,6 +25,7 @@
 <script>
 import { reactive, computed } from 'vue';
 import insConfig from "../local/insConfig";
+import { ImagesRes } from "../local/preloadRes";
 
 export default {
   props: {
@@ -42,9 +39,13 @@ export default {
   },
   emits: ['movestart', 'moveing', 'moveend'],
   setup(props, context) {
+    const labels = computed(() => {
       /** @type {String[]} */
-    const labels = insConfig[props.label];
-    const itemList = reactive(labels.map(() => {
+      const insList = insConfig[props.label] || [];
+      return insList;
+    });
+
+    const itemList = reactive(labels.value.map(() => {
       return {
         x: 0,
         y: 0,
@@ -53,9 +54,15 @@ export default {
         isMove: false
       }
     }) );
+
     const imagesList = computed(() => {
-      const label = props.label;
-      return insConfig[label] ? insConfig[label] : [];
+      return labels.value.map(name => {
+        const find = ImagesRes.find(item => item.id === name);
+        return {
+          name: name,
+          src: find ? find.src : ''
+        }
+      })
     });
 
     const transformStyle = (index) => {
@@ -78,7 +85,7 @@ export default {
       item.startX = touches.clientX;
       item.startY = touches.clientY;
       item.isMove = true;
-      context.emit('movestart', imagesList[index], touches.clientX, touches.clientY);
+      context.emit('movestart', imagesList.value[index].name, touches.clientX, touches.clientY);
     }
 
     /**
@@ -92,7 +99,7 @@ export default {
       const touches = event.targetTouches[0];
       item.x = touches.clientX - item.startX;
       item.y = touches.clientY - item.startY;
-      context.emit('moveing', imagesList[index], touches.clientX, touches.clientY);
+      context.emit('moveing', imagesList.value[index].name, touches.clientX, touches.clientY);
     }
 
     /**
@@ -104,7 +111,7 @@ export default {
       item.isMove = false;
       item.x = 0;
       item.y = 0;
-      context.emit('moveend', imagesList[index]);
+      context.emit('moveend', imagesList.value[index].name);
     }
 
     return {

@@ -1,5 +1,5 @@
 <template>
-  <layout-party :class="[loading ? 'page-load' : 'page-wrap', theme]">
+  <layout-party :class="['page-wrap', theme]">
     <template #stage>
       <div class="party-stage">
         <party-boy
@@ -11,7 +11,7 @@
           :skin="item.skin"
           :key="item.index"
         >
-          <div ref="hits" @click="removeSkin(index)" class="hit-box"></div>
+          <div :ref="el => RefHits[index] = el" @click="removeSkin(index)" class="hit-box"></div>
         </party-boy>
         <party-boy
           :index="0"
@@ -48,7 +48,7 @@
           label="first"
           :exclude="boysSkin"
           @moveing="itemMoving"
-          @moveEnd="itemMoveEnd"
+          @moveend="itemMoveEnd"
         >
         </party-ins>
         <party-ins
@@ -56,7 +56,7 @@
           label="second"
           :exclude="boysSkin"
           @moveing="itemMoving"
-          @moveEnd="itemMoveEnd"
+          @moveend="itemMoveEnd"
         >
         </party-ins>
       </div>
@@ -137,7 +137,7 @@ export default {
   setup() {
     const route = useRoute();
 
-    const loading = ref(false);
+    // const loading = ref(false);
     const theme = ref(route.query.theme === "newyear" ? "christmas" : "newyear");
     const boysList = reactive( [1, 2, 3, 4, 5].map(index => {
       return {
@@ -172,19 +172,16 @@ export default {
       });
       SoundControl.replay(leadSinger.value);
       composeStatus.value = 0;
-      visible.great = false;
+      visibles.great = false;
     }
 
-    const hits = ref(null);
+    const RefHits = [ boysList.map(() => null) ];
     // 物品移动事件
     const itemMoving = (name, clientX, clientY) => {
-      console.log('itemMoving', name, clientX, clientY, hits);
-      /* if (this.composeStatus !== 0) return;
-      const hits = this.$refs["hits"];
-      const list = this.boysList;
-      hits.forEach((item, index) => {
-        list[index].isHit = hitTestBox(item, clientX, clientY);
-      }); */
+      if (composeStatus.value !== 0) return;
+      RefHits.forEach((item, index) => {
+        boysList[index].isHit = hitTestBox(item, clientX, clientY);
+      });
     }
     // 物品移动结束事件
     const itemMoveEnd = (name) => {
@@ -273,7 +270,7 @@ export default {
           visibles.great = true;
           //SoundControl.replay(leadSinger.value);
         }, 2000);
-      }else if (this.boysSkin.length === 0) {
+      }else if (boysSkin.value.length === 0) {
         visibles.ask = true;
       } else {
         composeMusic(true); // 直接发布
@@ -305,8 +302,10 @@ export default {
       }
     }); */
 
+    visibles.load = true;
+
     return {
-      loading,
+      // loading,
       theme,
       boysList,
       boysSkin,
@@ -314,8 +313,7 @@ export default {
       composeStatus,
       visibles,
       restartGame,
-
-      hits, // ref?
+      RefHits,
       itemMoving,
       itemMoveEnd,
       changeSong,
@@ -333,6 +331,7 @@ export default {
 
 
 <style lang="scss" scoped>
+
 @mixin bg-image($image) {
   background-image: url("../../assets/images/musicParty2020/stage/#{$image}");
 }
@@ -340,7 +339,6 @@ export default {
   position: absolute;
   width: $width;
   height: $height;
-  // background: "url(../../assets/images/musicParty2020/stage/#{$image})" 0 0 no-repeat;
   @include bg-image($image);
   background-position: 0 0;
   background-repeat: no-repeat;

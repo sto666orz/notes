@@ -1,7 +1,7 @@
 <template>
   <div v-show="visible" :class="['boy', `boy-${index}`]">
     <div
-      :class="['animation', hit ? 'is-hit' : '', skin ? skin : 'empty']"
+      :class="['animation', hit ? 'is-hit' : null, skin ? skin : 'empty']"
     ></div>
     <div @touchstart="touchStart" @touchmove="touchMove">
       <slot></slot>
@@ -45,7 +45,6 @@ export default {
       }
     }
     return {
-      ...props,
       touchStart,
       touchMove,
     }

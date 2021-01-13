@@ -43,7 +43,7 @@ export default {
     const completed = () => {
       firstView.value = false;
       context.emit('update:visible', false);
-      context.emit('completed', toTheme);
+      context.emit('completed', toTheme.value);
     }
 
     const preload = () => {
@@ -52,7 +52,7 @@ export default {
       const timer = setTimeout(() => {
         timeout = true;
         completed();
-      }, 8000); // 产品说最长加载时间
+      }, 15000); // 最长加载时间
 
       Promise.all([
         preloadRes.addSounds(SoundsRes[toTheme.value]),
@@ -91,7 +91,6 @@ export default {
     });
 
     return {
-      ...props,
       fromTheme,
       toTheme,
       networkError,

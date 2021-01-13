@@ -1,135 +1,117 @@
 import { Howl } from 'howler'
 
-const insModules = import.meta.globEager('../../../assets/images/musicParty2020/stage/ins_*.png')
-const bgModules = import.meta.globEager('../../../assets/images/musicParty2020/stage/bg_*.png')
-const spritesModules = import.meta.globEager('../../../assets/images/musicParty2020/sprites/*.png')
+const modules = import.meta.globEager('../../../assets/images/musicParty2020/stage/ins_*.png')
 
-const christmasSounds = import.meta.globEager('../../../assets/sounds/musicParty2020/christmas/*.mp3')
-const newyearSounds = import.meta.globEager('../../../assets/sounds/musicParty2020/newyear/*.mp3')
-
-
-/**
- * vite文件加载方式
- * @returns {String} 图片地址
- */
-const getModSrc = (modules, fileName) => {
-  const moduleKeys = Object.keys(modules);
-  const find = moduleKeys.find(item => ~item.indexOf(fileName) );
-  return find ? modules[find].default : '';
-}
+console.log('modules', modules);
 
 export const ImagesRes = [
   // 乐器按钮
   {
       id: 'diangangqin',
-      src: getModSrc(insModules, 'ins_diangangqin@2x.png')
-  },
-  {
-    id: 'xiaotiqin',
-    src: getModSrc(insModules, 'ins_xiaotiqin@2x.png')
+      src: require('@/assets/images/musicParty2020/stage/ins_diangangqin@2x.png')
   },
   {
       id: 'jita',
-      src: getModSrc(insModules, 'ins_jita@2x.png')
+      src: require('@/assets/images/musicParty2020/stage/ins_jita@2x.png')
   },
   {
       id: 'dianjita',
-      src: getModSrc(insModules, 'ins_dianjita@2x.png')
+      src: require('@/assets/images/musicParty2020/stage/ins_dianjita@2x.png')
   },
   {
       id: 'beisi',
-      src: getModSrc(insModules, 'ins_beisi@2x.png')
+      src: require('@/assets/images/musicParty2020/stage/ins_beisi@2x.png')
   },
   {
       id: 'jueshigu',
-      src: getModSrc(insModules, 'ins_beisi@2x.png')
+      src: require('@/assets/images/musicParty2020/stage/ins_jueshigu@2x.png')
   },
   {
       id: 'hechengqi',
-      src: getModSrc(insModules, 'ins_hechengqi@2x.png')
+      src: require('@/assets/images/musicParty2020/stage/ins_hechengqi@2x.png')
   },
   {
       id: 'xueqiaoling',
-      src: getModSrc(insModules, 'ins_xueqiaoling@2x.png')
+      src: require('@/assets/images/musicParty2020/stage/ins_xueqiaoling@2x.png')
   },
   {
       id: 'dianzigu',
-      src: getModSrc(insModules, 'ins_dianzigu@2x.png')
+      src: require('@/assets/images/musicParty2020/stage/ins_dianzigu@2x.png')
   },
   {
       id: 'xiaohao',
-      src: getModSrc(insModules, 'ins_xiaohao@2x.png')
+      src: require('@/assets/images/musicParty2020/stage/ins_xiaohao@2x.png')
   },
   // 精灵动画
   {
       id: 'sprites_xiaohao',
-      src: getModSrc(spritesModules, 'xiaohao.png')
+      src: require('@/assets/images/musicParty2020/sprites/xiaohao.png')
   },
   {
       id: 'sprites_beisi',
-      src: getModSrc(spritesModules, 'beisi.png')
+      src: require('@/assets/images/musicParty2020/sprites/beisi.png')
   },
   {
       id: 'sprites_xiaotiqin',
-      src: getModSrc(spritesModules, 'xiaotiqin.png')
+      src: require('@/assets/images/musicParty2020/sprites/xiaotiqin.png')
   },
   {
       id: 'sprites_xueqiaoling',
-      src: getModSrc(spritesModules, 'xueqiaoling.png')
+      src: require('@/assets/images/musicParty2020/sprites/xueqiaoling.png')
   },
   {
       id: 'sprites_diangangqin',
-      src: getModSrc(spritesModules, 'diangangqin.png')
+      src: require('@/assets/images/musicParty2020/sprites/diangangqin.png')
   },
   {
       id: 'sprites_dianzigu',
-      src: getModSrc(spritesModules, 'dianzigu.png')
+      src: require('@/assets/images/musicParty2020/sprites/dianzigu.png')
   },
   {
       id: 'sprites_dianjita',
-      src: getModSrc(spritesModules, 'dianjita.png')
+      src: require('@/assets/images/musicParty2020/sprites/dianjita.png')
   },
   {
       id: 'sprites_xiaohao',
-      src: getModSrc(spritesModules, 'xiaohao.png')
+      src: require('@/assets/images/musicParty2020/sprites/xiaohao.png')
   },
   {
       id: 'sprites_jita',
-      src: getModSrc(spritesModules, 'jita.png')
+      src: require('@/assets/images/musicParty2020/sprites/jita.png')
   },
   {
       id: 'sprites_jueshigu',
-      src: getModSrc(spritesModules, 'jueshigu.png')
+      src: require('@/assets/images/musicParty2020/sprites/jueshigu.png')
   },
   {
       id: 'sprites_hechengqi',
-      src: getModSrc(spritesModules, 'hechengqi.png')
+      src: require('@/assets/images/musicParty2020/sprites/hechengqi.png')
   },
   // aha
   {
       id: 'aha_christmas',
-      src: getModSrc(spritesModules, 'aha_christmas.png')
+      src: require('@/assets/images/musicParty2020/sprites/aha_christmas.png')
   },
   {
       id: 'aha_newyear',
-      src: getModSrc(spritesModules, 'aha_newyear.png')
+      src: require('@/assets/images/musicParty2020/sprites/aha_newyear.png')
   },
   {
       id: 'run_christmas',
-      src: getModSrc(spritesModules, 'run_christmas.png')
+      src: require('@/assets/images/musicParty2020/sprites/run_christmas.png')
   },
   {
       id: 'run_newyear',
-      src: getModSrc(spritesModules, 'run_newyear.png')
+      src: require('@/assets/images/musicParty2020/sprites/run_newyear.png')
   },
   // 场景背景
   {
       id: 'bg_newyear',
-      src: getModSrc(bgModules, 'bg_newyear@2x.png')
+      src: require('@/assets/images/musicParty2020/stage/bg_newyear@2x.png')
   },
   {
       id: 'bg_christmas',
-      src: getModSrc(bgModules, 'bg_christmas@2x.png')
+      src: require('@/assets/images/musicParty2020/stage/bg_christmas@2x.png')
   }
 ];
 
@@ -138,114 +120,114 @@ export const SoundsRes = {
   christmas: [{
       id: 'song_christmas_beisi',
       alias: 'beisi',
-      src: getModSrc(christmasSounds, 'beisi.mp3')
+      src: require('../../../assets/sounds/musicParty2020/christmas/beisi.mp3')
     },
     {
       id: 'song_christmas_diangangqin',
       alias: 'diangangqin',
-      src: getModSrc(christmasSounds, 'diangangqin.mp3')
+      src: require('../../../assets/sounds/musicParty2020/christmas/diangangqin.mp3')
     },
     {
       id: 'song_christmas_dianjita',
       alias: 'dianjita',
-      src: getModSrc(christmasSounds, 'dianjita.mp3')
+      src: require('../../../assets/sounds/musicParty2020/christmas/dianjita.mp3')
     },
     {
       id: 'song_christmas_dianzigu',
       alias: 'dianzigu',
-      src: getModSrc(christmasSounds, 'dianzigu.mp3')
+      src: require('../../../assets/sounds/musicParty2020/christmas/dianzigu.mp3')
     },
     {
       id: 'song_christmas_hechengqi',
       alias: 'hechengqi',
-      src: getModSrc(christmasSounds, 'hechengqi.mp3')
+      src: require('../../../assets/sounds/musicParty2020/christmas/hechengqi.mp3')
     },
     {
       id: 'song_christmas_jita',
       alias: 'jita',
-      src: getModSrc(christmasSounds, 'jita.mp3')
+      src: require('../../../assets/sounds/musicParty2020/christmas/jita.mp3')
     },
     {
       id: 'song_christmas_jueshigu',
       alias: 'jueshigu',
-      src: getModSrc(christmasSounds, 'jueshigu.mp3')
+      src: require('../../../assets/sounds/musicParty2020/christmas/jueshigu.mp3')
     },
     {
       id: 'song_christmas_vocal',
       alias: 'vocal',
-      src: getModSrc(christmasSounds, 'vocal.mp3')
+      src: require('../../../assets/sounds/musicParty2020/christmas/vocal.mp3')
     },
     {
       id: 'song_christmas_xiaohao',
       alias: 'xiaohao',
-      src: getModSrc(christmasSounds, 'xiaohao.mp3')
+      src: require('../../../assets/sounds/musicParty2020/christmas/xiaohao.mp3')
     },
     {
       id: 'song_christmas_xiaotiqin',
       alias: 'xiaotiqin',
-      src: getModSrc(christmasSounds, 'xiaotiqin.mp3')
+      src: require('../../../assets/sounds/musicParty2020/christmas/xiaotiqin.mp3')
     },
     {
       id: 'song_christmas_xueqiaoling',
       alias: 'xueqiaoling',
-      src: getModSrc(christmasSounds, 'xueqiaoling.mp3')
+      src: require('../../../assets/sounds/musicParty2020/christmas/xueqiaoling.mp3')
     }
   ],
   newyear: [{
       id: 'song_newyear_beisi',
       alias: 'beisi',
-      src: getModSrc(newyearSounds, 'xueqiaoling.mp3')
+      src: require('../../../assets/sounds/musicParty2020/newyear/beisi.mp3')
     },
     {
       id: 'song_newyear_diangangqin',
       alias: 'diangangqin',
-      src: getModSrc(newyearSounds, 'diangangqin.mp3')
+      src: require('../../../assets/sounds/musicParty2020/newyear/diangangqin.mp3')
     },
     {
       id: 'song_newyear_dianjita',
       alias: 'dianjita',
-      src: getModSrc(newyearSounds, 'dianjita.mp3')
+      src: require('../../../assets/sounds/musicParty2020/newyear/dianjita.mp3')
     },
     {
       id: 'song_newyear_dianzigu',
       alias: 'dianzigu',
-      src: getModSrc(newyearSounds, 'dianzigu.mp3')
+      src: require('../../../assets/sounds/musicParty2020/newyear/dianzigu.mp3')
     },
     {
       id: 'song_newyear_hechengqi',
       alias: 'hechengqi',
-      src: getModSrc(newyearSounds, 'hechengqi.mp3')
+      src: require('../../../assets/sounds/musicParty2020/newyear/hechengqi.mp3')
     },
     {
       id: 'song_newyear_jita',
       alias: 'jita',
-      src: getModSrc(newyearSounds, 'jita.mp3')
+      src: require('../../../assets/sounds/musicParty2020/newyear/jita.mp3')
     },
     {
       id: 'song_newyear_jueshigu',
       alias: 'jueshigu',
-      src: getModSrc(newyearSounds, 'jueshigu.mp3')
+      src: require('../../../assets/sounds/musicParty2020/newyear/jueshigu.mp3')
     },
     {
       id: 'song_newyear_vocal',
       alias: 'vocal',
-      src: getModSrc(newyearSounds, 'vocal.mp3')
+      src: require('../../../assets/sounds/musicParty2020/newyear/vocal.mp3')
     },
     {
       id: 'song_newyear_xiaohao',
       alias: 'xiaohao',
-      src: getModSrc(newyearSounds, 'xiaohao.mp3')
+      src: require('../../../assets/sounds/musicParty2020/newyear/xiaohao.mp3')
     },
 
     {
       id: 'song_newyear_xiaotiqin',
       alias: 'xiaotiqin',
-      src: getModSrc(newyearSounds, 'xiaotiqin.mp3')
+      src: require('../../../assets/sounds/musicParty2020/newyear/xiaotiqin.mp3')
     },
     {
       id: 'song_newyear_xueqiaoling',
       alias: 'xueqiaoling',
-      src: getModSrc(newyearSounds, 'xueqiaoling.mp3')
+      src: require('../../../assets/sounds/musicParty2020/newyear/xueqiaoling.mp3')
     }
   ]
 };

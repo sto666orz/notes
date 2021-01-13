@@ -28,10 +28,10 @@ export default {
     }
     const notify = (event) => {
       context.emit(event, null);
+      closeView();
     }
 
     return {
-      ...props,
       notify,
       closeView,
     }
