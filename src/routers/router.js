@@ -1,0 +1,26 @@
+import { createRouter, createWebHashHistory } from "vue-router"
+import Index from './Index'
+
+
+const Router = createRouter({
+  history: createWebHashHistory(),
+  routes: Index
+});
+
+Router.beforeEach((to, from, next) => {
+  const meta = to.meta || {};
+  // 设置标题
+  if ( to.meta.title ) {
+    document.title = meta.title;
+  }
+  // 设置页面最大宽度限制
+  const html = document.querySelector('html');
+  if ( meta.size ) {
+    html.className = `root-${meta.size}`;
+  } else if ( html.className ) {
+    html.className = '';
+  }
+  next()
+})
+
+export default Router;

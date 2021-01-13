@@ -1,0 +1,31 @@
+/*项目样式配置*/
+html {
+  font-size: 10vw; /* (75 / 750 * 100) */
+}
+
+/* 默认ipad独立设置 */
+@media only screen and (min-device-width: 768px) {
+
+  @mixin appSize($size) {
+      font-size: $size;
+      #app {
+        max-width: $size * 10;
+        margin: 0 auto;
+      }
+  }
+
+  .root-75 {
+    @include appSize(75px);
+  }
+  .root-50 {
+    @include appSize(50px);
+  }
+}
+
+/* APP基础样式 */
+#app {
+  height: 100%;
+  font-family: 'PingFang SC', miui, system-ui, -apple-system, BlinkMacSystemFont, Helvetica Neue, Helvetica, sans-serif;
+  color: #2c3e50;
+  /* user-select: none; */
+}

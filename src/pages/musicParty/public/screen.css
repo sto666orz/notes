@@ -1,0 +1,13 @@
+/* 本项目ipad独立设置 */
+@media only screen and (min-device-width: 768px) {
+    html {
+        font-size: 55px !important;
+    }
+    #app {
+        max-width: 550px;
+    }
+}
+
+#app {
+    font-family: 'PingFang SC', miui, system-ui, -apple-system, BlinkMacSystemFont, Helvetica Neue, Helvetica, sans-serif;
+}
