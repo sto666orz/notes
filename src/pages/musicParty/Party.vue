@@ -1,7 +1,7 @@
 <template>
   <layout-party :class="['page-wrap', theme]">
     <template #stage>
-      <div class="party-stage">
+      <div class="party-stage" :class="{ 'animation-stop' : composeStatus === 1 }">
         <party-boy
           v-for="(item, index) in boysList"
           @slideDown="removeSkin(index)"
@@ -70,7 +70,7 @@
     <button
       v-if="composeStatus === 0"
       class="button-help"
-      @click="learnVisible = true"
+      @click="visibles.learn = true"
     ></button>
 
     <popup-ask
@@ -100,8 +100,8 @@
 
 <script>
 
-import { ref, reactive, computed, onUnmounted } from 'vue'
-import { useRouter, useRoute, onBeforeRouteLeave } from 'vue-router'
+import { ref, reactive, computed, onUnmounted } from 'vue';
+import { useRouter, useRoute } from 'vue-router';
 
 // import FastShare from "./components/public/fastShare.vue";
 import LayoutParty from "./components/layout/Party.vue";
@@ -134,7 +134,7 @@ export default {
     LearnGame,
     StageLoading,
   },
-  setup() {
+  setup(props) {
     const route = useRoute();
 
     // const loading = ref(false);
@@ -268,8 +268,8 @@ export default {
         setTimeout(() => {
           composeStatus.value = 2;
           visibles.great = true;
-          //SoundControl.replay(leadSinger.value);
-        }, 2000);
+          SoundControl.replay(leadSinger.value);
+        }, 1500);
       }else if (boysSkin.value.length === 0) {
         visibles.ask = true;
       } else {
@@ -290,19 +290,8 @@ export default {
       SoundControl.clear();
     });
 
-    /* onBeforeRouteLeave((to, from, next) => {
-      // 因为音乐无法直接播放会导致bug 所以此页面不给直接访问 需要通过其它页面点击跳转过来
-      if (from.name === null) {
-        next({
-          path: "/musicParty/home",
-          query: to.query
-        });
-      } else {
-        next();
-      }
-    }); */
-
     visibles.load = true;
+    visibles.learn = true;
 
     return {
       // loading,
@@ -325,6 +314,17 @@ export default {
       linkToLottery,
       shareView,
     }
+  },
+  beforeRouteEnter(to, from, next) {
+    // 因为音乐无法直接播放会导致bug 所以此页面不给直接访问 需要通过其它页面点击跳转过来
+    if (from.path == '/') {
+      next({
+        path: '/musicParty/home',
+        query: to.query
+      });
+    } else {
+      next();
+    }
   }
 }
 </script>
@@ -339,10 +339,11 @@ export default {
   position: absolute;
   width: $width;
   height: $height;
-  @include bg-image($image);
+  background-color: transparent;
   background-position: 0 0;
   background-repeat: no-repeat;
   background-size: 100%;
+  @include bg-image($image);
 }
 
 .page-load {

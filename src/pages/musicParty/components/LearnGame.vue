@@ -126,13 +126,13 @@ export default {
       if (stepCurrent.value === 0) {
         notify();
       } else if (stepCurrent.value === 1) {
-        this.learnBoy.skin = "diangangqin";
+        learnBoy.skin = "diangangqin";
         notify();
       } else if (stepCurrent.value === 2) {
-        this.learnBoy.skin = "";
+        learnBoy.skin = "";
         notify();
       } else if (stepCurrent.value === 3) {
-        this.learnAha.isSong = true;
+        learnAha.isSong = true;
         notify();
       }
       stepCurrent.value = Math.min(stepCurrent.value + 1, 3);
@@ -181,6 +181,7 @@ export default {
       itemMoving,
       itemMoveEnd,
       skipLearn,
+      nextStep,
     }
   }
 }
