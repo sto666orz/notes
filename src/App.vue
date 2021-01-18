@@ -1,7 +1,5 @@
 <template>
-  <div id="main">
-    <app-router></app-router>
-  </div>
+  <app-router></app-router>
 </template>
 
 <script>
@@ -14,14 +12,3 @@ export default {
   }
 }
 </script>
-
-
-<style lang="scss" scoped>
-#main {
-  width: 100%;
-  // max-width: 750px;
-  height: 100%;
-  margin: 0 auto;
-  background-color: blanchedalmond;
-}
-</style>

@@ -7,7 +7,8 @@ export default [
     name: 'MusicPartyHome',
     component: Home,
     meta: {
-        title: '双旦音乐派对'
+        title: '双旦音乐派对',
+        root: 50
     }
   },
   {
@@ -15,7 +16,8 @@ export default [
     name: 'MusicPartyParty',
     component: Party,
     meta: {
-        title: '双旦音乐派对'
+        title: '双旦音乐派对',
+        root: 50
     }
   },
 ]

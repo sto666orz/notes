@@ -1,7 +1,11 @@
 import Home from '../pages/Home.vue'
 import NotFound from '../pages/NotFound.vue'
 
-import musicParty2020 from './modules/musicParty2020'
+// 添加所有routers
+const routerModules = import.meta.globEager('./modules/*.js')
+const routersAll = Object.keys(routerModules).reduce((arr, key) => {
+  return arr.concat( routerModules[key].default );
+}, []);
 
 export default [
   {
@@ -12,5 +16,5 @@ export default [
     path: "/:pathMatch(.*)*",
     component: NotFound
   },
-  ...musicParty2020
+  ...routersAll
 ]

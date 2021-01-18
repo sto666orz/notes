@@ -1,4 +1,4 @@
-const insModules = import.meta.globEager('../../../assets/images/thanksGive/games/ins_*.png')
+const assetsModules = import.meta.globEager('../../../assets/images/thanksGive/games/*.*')
 
 // 游戏帧率
 export const FPS = 60;
@@ -9,6 +9,15 @@ export const SCREEN = {
     HEIGHT: 1448
 }
 
+/**
+ * vite文件加载方式
+ * @returns {String} 图片地址
+ */
+const getModSrc = (modules, fileName) => {
+    const moduleKeys = Object.keys(modules);
+    const find = moduleKeys.find(item => ~item.indexOf(fileName) );
+    return find ? modules[find].default : '';
+  }
 
 /**
  * 游戏难度配置
@@ -74,51 +83,51 @@ export const GOD_MODE = {
 export const Resources = [
     {
         id: 'background_header',
-        src: require('@/assets/images/thanksGive/games/bg_header@2x.jpg')
+        src: getModSrc(assetsModules, 'bg_header@2x.jpg')
     },
     {
         id: 'background_main',
-        src: require('@/assets/images/thanksGive/games/bg_main@2x.png')
+        src: getModSrc(assetsModules, 'bg_main@2x.png')
     },
     {
         id: 'background_main2',
-        src: require('@/assets/images/thanksGive/games/bg_main2@2x.png')
+        src: getModSrc(assetsModules, 'bg_main2@2x.png')
     },
     {
         id: 'background_footer',
-        src: require('@/assets/images/thanksGive/games/bg_footer@2x.png')
+        src: getModSrc(assetsModules, 'bg_footer@2x.png')
     },
     {
         id: 'ready_image',
-        src: require('@/assets/images/thanksGive/games/ready_image@2x.png')
+        src: getModSrc(assetsModules, 'ready_image@2x.png')
     },
     {
         id: 'pause_image',
-        src: require('@/assets/images/thanksGive/games/pause_image@2x.png')
+        src: getModSrc(assetsModules, 'pause_image@2x.png')
     },
     {
         id: 'player',
-        src: require('@/assets/images/thanksGive/games/player@2x.png')
+        src: getModSrc(assetsModules, 'player@2x.png')
     },
     {
         id: 'player_shadow',
-        src: require('@/assets/images/thanksGive/games/player_shadow@2x.png')
+        src: getModSrc(assetsModules, 'player_shadow@2x.png')
     },
     {
         id: 'music',
-        src: require('@/assets/images/thanksGive/games/music@2x.png')
+        src: getModSrc(assetsModules, 'music@2x.png')
     },
     {
         id: 'piano',
-        src: require('@/assets/images/thanksGive/games/piano@2x.png')
+        src: getModSrc(assetsModules, 'piano@2x.png')
     },
     {
         id: 'boy',
-        src: require('@/assets/images/thanksGive/games/boy@2x.png')
+        src: getModSrc(assetsModules, 'boy@2x.png')
     },
     {
         id: 'miss',
-        src: require('@/assets/images/thanksGive/games/miss@2x.png')
+        src: getModSrc(assetsModules, 'miss@2x.png')
     },
 ];
 

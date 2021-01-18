@@ -16,9 +16,9 @@ Router.beforeEach((to, from, next) => {
   // 设置页面最大宽度限制
   const html = document.querySelector('html');
   if ( meta.size ) {
-    html.className = `root-${meta.size}`;
-  } else if ( html.className ) {
-    html.className = '';
+    html.setAttribute('id', `rootSize-${meta.size}`);
+  } else if ( html.getAttribute('id') ) {
+    html.removeAttribute('id');
   }
   next()
 })
