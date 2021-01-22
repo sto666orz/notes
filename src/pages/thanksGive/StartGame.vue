@@ -27,7 +27,7 @@
 <script>
 import { ref, reactive, toRefs , onMounted, onUnmounted } from 'vue';
 import GameManager from "./games/GameManager";
-import GameOver from "./components/gameOver.vue";
+import GameOver from "./components/GameOver.vue";
 
 export default {
   components: {
