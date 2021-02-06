@@ -25,7 +25,7 @@
     <div v-else class="popup-output" key="output">
       <div class="popup-center">
         <img :src="posterImageBase64" alt="" ref="RefContent" />
-        <p v-if="!isApp" class="hold-tips">长按保存海报</p>
+        <p class="hold-tips">长按保存海报</p>
         <div class="button-group">
           <div class="continue" @click="againGame()">继续挑战</div>
           <!-- <div class="rank" @click="toRankList()">查看全国排名</div> -->
@@ -43,9 +43,9 @@
 
 <script>
 import { onMounted, reactive, ref, toRefs } from 'vue';
-import QRCode from 'qrcode';
+// import QRCode from 'qrcodejs2';
 import html2canvas from "html2canvas";
-import AlloyFinger from "alloyfinger";
+// import AlloyFinger from "alloyfinger";
 
 
 export default {
@@ -91,8 +91,9 @@ export default {
     const makePoster = () => {
       document.documentElement.scrollTop = document.body.scrollTop = 0;
       setTimeout(() => {
-        const width = RefPoster.offsetWidth * 1;
-        const height = RefPoster.offsetHeight * 1;
+        const element = RefPoster.value;
+        const width = element.offsetWidth * 1;
+        const height = element.offsetHeight * 1;
         const options = {
           width,
           height,
@@ -108,8 +109,8 @@ export default {
           backgroundColor: null,
         };
         // 转换为canvas
-        html2canvas(RefPoster, options).then(canvas => {
-          RefOutput.appendChild(canvas);
+        html2canvas(element, options).then(canvas => {
+          RefOutput.value.appendChild(canvas);
           // canvas转换为base64
           data.posterImageBase64 = canvas.toDataURL("image/png");
           data.showPoster = true;
@@ -117,14 +118,15 @@ export default {
             this.longTap();
           }); */
         });
-      }, 250);
+      }, 200);
     }
 
-    const createQrcode = () => {
-      let qrcode = new QRCode(codeRef, {
-        text: data.short_url,
-        width: Math.floor(RefQrcode.offsetWidth),
-        height: Math.floor(RefQrcode.offsetHeight),
+    /* const createQrcode = () => {
+      const element = RefQrcode.value;
+      let qrcode = new QRCode(element, {
+        text: 'data.short_url',
+        width: Math.floor(element.offsetWidth),
+        height: Math.floor(element.offsetHeight),
         colorDark: "#000000",
         colorLight: "#ffffff",
         correctLevel: QRCode.CorrectLevel.L,
@@ -134,10 +136,11 @@ export default {
       );
 
       makePoster();
-    }
+    } */
 
     onMounted(() => {
-      createQrcode();
+      // createQrcode();
+      makePoster();
     })
 
     return {

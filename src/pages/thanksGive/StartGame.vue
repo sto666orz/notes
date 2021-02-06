@@ -16,7 +16,7 @@
       :missCount="missCount"
       :scoreTime="scoreTime"
       :playerRank="playerRank"
-      @complete="closeLoding"
+      @complete=" ('此处应该closeLoding') "
       @againGame="againGame"
       @closeView="gameover = false"
     >
@@ -35,12 +35,13 @@ export default {
   },
   setup() {
     const userInfo = reactive({
+      gameover: false,
       avatar: '',
       nickname: '游客',
       playCoin: 99,
       scoreTime: 0, // 游戏时间
       missCount: 0, // miss次数
-      playerRank: 1,
+      playerRank: 1000,
     })
 
     const RefGame = ref(null);
@@ -54,6 +55,9 @@ export default {
     }
 
     const submitScore = ({ time, miss }) => {
+      userInfo.gameover = true;
+      userInfo.scoreTime = time;
+      userInfo.missCount = miss;
       // 此处是向服务器提交
       return Promise.resolve();
     }
@@ -71,9 +75,9 @@ export default {
     }
 
     onMounted(() => {
-      const gameManager = new GameManager(RefGame);
+      gameManager = new GameManager(RefGame.value);
       // 游戏加载进度
-      gameManager.drawProgress(RefProgress);
+      gameManager.drawProgress(RefProgress.value);
       // 监听游戏结束
       gameManager.on("gameover", ({ detail }) => {
         submitScore(detail).then(() => {
@@ -90,6 +94,7 @@ export default {
     
     return {
       ...toRefs(userInfo),
+      againGame,
       RefGame,
       RefProgress,
     }
