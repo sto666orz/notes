@@ -7,6 +7,9 @@
         <router-link to="/thanksgive/home">
           <Button>接音符游戏</Button>
         </router-link>
+        <router-link to="/hellovideo/home">
+          <Button>web伪横屏视频</Button>
+        </router-link>
     </div>
 </template>
 
