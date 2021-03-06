@@ -10,7 +10,11 @@ const routersAll = Object.keys(routerModules).reduce((arr, key) => {
 export default [
   {
     path: '/',
-    component: Home
+    component: Home,
+    meta: {
+      title: '毕俊的主页',
+      root: 75
+    }
   },
   {
     path: "/:pathMatch(.*)*",

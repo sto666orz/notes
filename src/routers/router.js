@@ -15,8 +15,8 @@ Router.beforeEach((to, from, next) => {
   }
   // 设置页面最大宽度限制
   const html = document.querySelector('html');
-  if ( meta.size ) {
-    html.setAttribute('id', `rootSize-${meta.size}`);
+  if ( meta.root ) {
+    html.setAttribute('ipad', `${meta.root}`);
   } else if ( html.getAttribute('id') ) {
     html.removeAttribute('id');
   }

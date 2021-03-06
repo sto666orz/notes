@@ -11,6 +11,7 @@
     <div
       v-if="fullScreen"
       class="hello-screen"
+      ref="helloScreenRef"
       @touchstart="sandClockControl()"
       @touchmove="sandClockControl()"
       @touchend="sandClockControl()"
@@ -92,7 +93,7 @@
           <p class="loading-text">视频加载失败</p>
         </div>
 
-        <!-- <follow-toast ref="toast"></follow-toast> -->
+        <follow-toast v-model:toast="toast"></follow-toast>
       </div>
     </div>
 
@@ -124,34 +125,33 @@ import {
   watch,
 } from "vue";
 
+import FollowToast from "./FollowToast.vue";
 import { formatSeconds } from "../util/timeTranslate";
-// import FollowToast from "./followToast.vue";
+import { requestFullscreen, exitFullscreen } from "../util/fullScreen";
 
-/* function createControl() {
-  return {
-    hidden: false, // 是否隐藏控制条
-    totalTime: 0, // 视频总时长
-    currentTime: 0, // 当前播放时间
-    loading: false, // 视频加载中
-    playing: false, // 视频播放中
-    isError: false, // 加载错误
-    hideClock: null, // 自动隐藏的时钟
-  };
+function defaultControl(control) {
+  control.hidden = false; // 是否隐藏控制条
+  control.totalTime = 0; // 视频总时长
+  control.currentTime = 0; // 当前播放时间
+  control.loading = false; // 视频加载中
+  control.playing = false; // 视频播放中
+  control.isError = false; // 加载错误
+  control.hideClock = null; // 自动隐藏的时钟
+  return control;
 }
-function createProgress() {
-  return {
-    lastTouchesX: 0, // 最后位置
-    lastTouchesY: 0,
-    isMoved: false, // 拖动中
-    position: 0, // 当前位置 百分比
-    passedTime: -1, // 最高已经通过的时间
-    nextTime: -1, // 抵达下个视频节点的时间
-  };
-} */
+function defaultProgress(progress) {
+  progress.lastTouchesX = 0; // 最后位置
+  progress.lastTouchesY = 0;
+  progress.isMoved = false; // 拖动中
+  progress.position = 0; // 当前位置 百分比
+  progress.passedTime = -1; // 最高已经通过的时间
+  progress.nextTime = -1; // 抵达下个视频节点的时间
+  return progress;
+}
 
 export default {
   components: {
-    // FollowToast,
+    FollowToast,
   },
   props: {
     fullScreen: Boolean, // 全屏显示
@@ -186,6 +186,7 @@ export default {
       },
       inPassProgress: false, // 正在显示节点内容
       isPlayEnd: false, // 是否播放完毕
+      toast: '',  //提示文本
     });
 
     const control = reactive({
@@ -243,16 +244,22 @@ export default {
 
     /** @type {{ value: HTMLVideoElement }} */
     const videoRef = ref(null);
+    /** @type {{ value: HTMLDivElement }} */
+    const helloScreenRef = ref(null);
 
     function tryFullScreen() {
       if (!props.fullScreen && props.sources) {
         context.emit("update:fullScreen", true);
       }
+      // 尝试浏览器原生全屏功能(IOS不支持)
+      nextTick(() => {
+        requestFullscreen(helloScreenRef.value);
+      });
     }
 
     function initVideo() {
-      // this.control = createControl();
-      // this.progress = createProgress();
+      defaultControl(control);
+      defaultProgress(progress);
       control.loading = true;
       nextTick(() => {
         loadRefs();
@@ -316,7 +323,7 @@ export default {
         control.playing = false;
       };
       const videoended = (event) => {
-        isPlayEnd = true;
+        data.isPlayEnd = true;
       };
       const videowaiting = (event) => {
         control.loading = true;
@@ -472,8 +479,7 @@ export default {
       const maxTime = maxPassTime.value;
       const maxPercent = maxTime >= 0 ? getProgressPercent(maxTime) : 100;
       if (maxTime >= 0 && progress.position >= maxPercent) {
-        // this.$refs["toast"].viewToast("请先完成本练习，才能学习后面的内容");
-        // TODO::::
+        data.toast = '请先完成本练习，才能学习后面的内容';
       }
       // IOS监听在父级监听click 会使触摸事件变的难用 所以在独立事件中进行阻止
       sandClockControl();
@@ -552,6 +558,7 @@ export default {
       if (!val) {
         data.isPlayEnd = false;
         data.inPassProgress = false;
+        exitFullscreen();
       } else {
         initVideo();
       }
@@ -562,6 +569,7 @@ export default {
       control,
       progress,
       videoRef,
+      helloScreenRef,
       // computed
       matchesStyle,
       fontSize,

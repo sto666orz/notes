@@ -29,8 +29,8 @@
 
 <script>
 import VideoDemo from './components/helloVideo.vue'
-import Interaction from './components/interaction.vue'
-import PopoverEnd from './components/popoverEnd.vue'
+import Interaction from './components/Interaction.vue'
+import PopoverEnd from './components/PopoverEnd.vue'
 
 // import MkBridge from "mk-bridge"
 import { compareVersion } from 'util/appBase'

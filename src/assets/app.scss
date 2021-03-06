@@ -3,28 +3,23 @@
   font-size: 10vw; /* (75 / 750 * 100) */
 }
 
+@mixin AppSize($size) {
+  &:root {
+    font-size: $size !important;
+  }
+  #app {
+    max-width: $size * 10;
+  }
+}
+
 /* 默认ipad独立设置 */
 @media only screen and (min-device-width: 768px) {
-
-  @mixin appSize($size) {
-      &:root {
-        font-size: $size !important;
-      }
-      #app {
-        max-width: $size * 10;
-      }
+  html[ipad="75"] {
+    @include AppSize(75PX);
   }
-
-  #rootSize-75 {
-    @include appSize(75PX);
+  html[ipad="50"] {
+    @include AppSize(50PX);
   }
-  #rootSize-50 {
-    @include appSize(50PX);
-  }
-  /* 
-  html#root {
-    font-size: 50px;
-  } */
 }
 
 /* APP基础样式 */

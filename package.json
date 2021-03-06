@@ -6,7 +6,7 @@
     "build": "vite build"
   },
   "dependencies": {
-    "@vitejs/plugin-vue": "^1.0.5",
+    "@vitejs/plugin-vue": "^1.1.5",
     "better-scroll": "^2.1.1",
     "hilojs": "^2.0.2",
     "howler": "^2.2.1",
@@ -16,9 +16,9 @@
     "vue-router": "4.0.3"
   },
   "devDependencies": {
-    "@vue/compiler-sfc": "^3.0.5",
+    "@vue/compiler-sfc": "^3.0.7",
     "postcss-pxtorem": "^5.1.1",
-    "sass": "^1.32.4",
-    "vite": "^2.0.0-beta.25"
+    "sass": "^1.32.8",
+    "vite": "^2.0.5"
   }
 }

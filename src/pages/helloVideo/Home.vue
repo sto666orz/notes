@@ -8,42 +8,31 @@
     @progress="viewQuestions"
   >
     <template #mask="{ portrait }">
-      <interaction 
-          :portrait="portrait"
-          :questions="inclusion"
-          @complete="resolveCallback"
-          @abort="rejectCallback">
-        </interaction>
-      <!-- <div>
-        <p>问题{{ portrait }}</p>
-        <span @click="resolveCallback">完成</span>
-        <span @click="rejectCallback">拒绝</span>
-      </div> -->
+      <interaction
+        :portrait="portrait"
+        :questions="inclusion"
+        @complete="resolveCallback"
+        @abort="rejectCallback"
+      >
+      </interaction>
     </template>
     <template #end>
-      <div>
-        <p>课程完成</p>
-        <span @click="closeVideo">完成</span>
-      </div>
-      <!-- <popover-end
-                @close="closeVideo()"
-                @reset="resetVideo()"
-                @next="nextVideo()">
-            </popover-end> -->
+      <popover-end @close="closeVideo()" @reset="resetVideo()"> </popover-end>
     </template>
   </video-demo>
 </template>
 
 <script>
-import { reactive, toRefs } from "vue";
+import { reactive, toRefs, nextTick } from "vue";
 import VideoDemo from "./components/HelloVideo.vue";
 import Interaction from "./components/Interaction.vue";
+import PopoverEnd from "./components/PopoverEnd.vue";
 
 export default {
   components: {
     VideoDemo,
     Interaction,
-    // PopoverEnd
+    PopoverEnd,
   },
   setup(props) {
     const data = reactive({
@@ -65,7 +54,8 @@ export default {
                     } */,
             {
               stem_type: 3,
-              stem_content: "https://tests001.pnlyy.com/mb/vXkbG9bt6VxLvQi0cAMPxmKR6JyhKDcK22.mp3",
+              stem_content:
+                "https://tests001.pnlyy.com/mb/vXkbG9bt6VxLvQi0cAMPxmKR6JyhKDcK22.mp3",
             },
           ],
           question_analysis: [
@@ -76,25 +66,30 @@ export default {
             },
             {
               analysis_type: 3,
-              analysis_content: "https://tests001.pnlyy.com/mb/vXkbG9bt6VxLvQi0cAMPxmKR6JyhKDcK22.mp3",
+              analysis_content:
+                "https://tests001.pnlyy.com/mb/vXkbG9bt6VxLvQi0cAMPxmKR6JyhKDcK22.mp3",
             },
           ],
           question_option: [
             {
               is_answer: true,
-              option_img: "https://tests001.pnlyy.com/mb/vXkbG9bt6VxLvQi0cAMPxmKR6JyhKDcK21-1.png",
+              option_img:
+                "https://tests001.pnlyy.com/mb/vXkbG9bt6VxLvQi0cAMPxmKR6JyhKDcK21-1.png",
             },
             {
               is_answer: false,
-              option_img: "https://tests001.pnlyy.com/mb/vXkbG9bt6VxLvQi0cAMPxmKR6JyhKDcK21-2.png",
+              option_img:
+                "https://tests001.pnlyy.com/mb/vXkbG9bt6VxLvQi0cAMPxmKR6JyhKDcK21-2.png",
             },
             {
               is_answer: false,
-              option_img: "https://tests001.pnlyy.com/mb/vXkbG9bt6VxLvQi0cAMPxmKR6JyhKDcK21-3.png",
+              option_img:
+                "https://tests001.pnlyy.com/mb/vXkbG9bt6VxLvQi0cAMPxmKR6JyhKDcK21-3.png",
             },
             {
               is_answer: false,
-              option_img: "https://tests001.pnlyy.com/mb/vXkbG9bt6VxLvQi0cAMPxmKR6JyhKDcK21-4.png",
+              option_img:
+                "https://tests001.pnlyy.com/mb/vXkbG9bt6VxLvQi0cAMPxmKR6JyhKDcK21-4.png",
             },
           ],
         },
@@ -112,7 +107,8 @@ export default {
             },
             {
               stem_type: 2,
-              stem_content: "https://tests001.pnlyy.com/FbZ0e1kGNoylzTZ831bRA9P8aOIklL5dwaterMark.jpg",
+              stem_content:
+                "https://tests001.pnlyy.com/FbZ0e1kGNoylzTZ831bRA9P8aOIklL5dwaterMark.jpg",
             },
           ],
           question_analysis: [
@@ -163,11 +159,13 @@ export default {
             },
             {
               stem_type: 2,
-              stem_content: "mb/vXkbG9bt6VxLvQi0cAMPxmKR6JyhKDcK22.png",
+              stem_content:
+                "https://tests001.pnlyy.com/mb/vXkbG9bt6VxLvQi0cAMPxmKR6JyhKDcK22.png",
             },
             {
               stem_type: 3,
-              stem_content: "https://tests001.pnlyy.com/mb/vXkbG9bt6VxLvQi0cAMPxmKR6JyhKDcK22.mp3",
+              stem_content:
+                "https://tests001.pnlyy.com/mb/vXkbG9bt6VxLvQi0cAMPxmKR6JyhKDcK22.mp3",
             },
           ],
           question_analysis: [
@@ -180,19 +178,23 @@ export default {
           question_option: [
             {
               is_answer: true,
-              option_img: "https://tests001.pnlyy.com/mb/vXkbG9bt6VxLvQi0cAMPxmKR6JyhKDcK22-1.png",
+              option_img:
+                "https://tests001.pnlyy.com/mb/vXkbG9bt6VxLvQi0cAMPxmKR6JyhKDcK22-1.png",
             },
             {
               is_answer: false,
-              option_img: "https://tests001.pnlyy.com/mb/vXkbG9bt6VxLvQi0cAMPxmKR6JyhKDcK22-2.png",
+              option_img:
+                "https://tests001.pnlyy.com/mb/vXkbG9bt6VxLvQi0cAMPxmKR6JyhKDcK22-2.png",
             },
             {
               is_answer: false,
-              option_img: "https://tests001.pnlyy.com/mb/vXkbG9bt6VxLvQi0cAMPxmKR6JyhKDcK22-3.png",
+              option_img:
+                "https://tests001.pnlyy.com/mb/vXkbG9bt6VxLvQi0cAMPxmKR6JyhKDcK22-3.png",
             },
             {
               is_answer: false,
-              option_img: "https://tests001.pnlyy.com/mb/vXkbG9bt6VxLvQi0cAMPxmKR6JyhKDcK22-4.png",
+              option_img:
+                "https://tests001.pnlyy.com/mb/vXkbG9bt6VxLvQi0cAMPxmKR6JyhKDcK22-4.png",
             },
           ],
         },
@@ -210,10 +212,17 @@ export default {
     const closeVideo = () => {
       data.fullScreen = false;
     };
+    const resetVideo = () => {
+      data.fullScreen = false;
+      nextTick(() => {
+        data.fullScreen = true;
+      });
+    };
 
     return {
       ...toRefs(data),
       closeVideo,
+      resetVideo,
       viewQuestions,
     };
   },
