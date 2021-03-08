@@ -34,12 +34,7 @@ export default {
     } */
   },
   build: {
-    /**
-     * 在生产中服务时的基本公共路径。
-     * @default '/'
-     */
-    base: './',
-    // outDir: 'dist',
+    // outDir: 'build',
     // assetsDir: 'assets',
     // sourcemap: false,
     // manifest: false
