@@ -25,7 +25,7 @@
         v-for="(item, index) in buttons" 
         :key="index"
         :type="item.type" 
-        style="width:50vw"
+        style="width:80%"
         @click="showSheet(item)"
       >
         查看{{item.name}}
@@ -34,7 +34,7 @@
     </div>
   </div>
 
-  <div class="bottom">
+  <div class="holder-bottom">
     <p>
       <a href="https://bishaoxia.gitee.io" target="_blank">
         <Button type="primary" size="mini">也欢迎访问我的博客（点我访问）</Button>
