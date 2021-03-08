@@ -1,41 +1,96 @@
 <template>
-  <div class="background"></div>
+  <!-- <div class="background"></div> -->
+  <div class="background">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
   <div class="wrapper">
     <div class="main">
-      <h5 class="title">【毕俊】的零散Demo展示</h5>
+      <h5 class="title">【毕俊】的零散Demo</h5>
       <h5 class="title-2">欢迎访问毕俊的小站，这是一个使用Vue3 + Vite构建的项目。</h5>
-      <p class="tips">推荐使用移动端进行访问</p>
-      <p class="tips">
-        也欢迎访问我的Blog
-        <a href="https://bishaoxia.gitee.io" target="_blank">
-          <Button type="primary">前往Blog</Button>
-        </a>
-      </p>
+      <p class="text">
+        <span class="bold">做这个的目的？</span>
+        学习最好的方法是动手，于是将以前的项目使用Vue3进行了重构，尝鲜了vue3 compositionAPI，体会到了Vue3的改变。</p>
+      <br/>
+
+      <Button 
+        v-for="(item, index) in buttons" 
+        :key="index"
+        :type="item.type" 
+        style="width:50vw"
+        @click="showSheet(item)"
+      >
+        查看{{item.name}}
+      </Button>
+
     </div>
-
-    <router-link to="/musicparty/home">
-      <Button type="primary">音乐合成游戏</Button>
-    </router-link>
-    <router-link to="/thanksgive/home">
-      <Button type="success">接音符游戏</Button>
-    </router-link>
-    <router-link to="/hellovideo/home">
-      <Button>web伪横屏视频</Button>
-    </router-link>
-
-    <action-sheet v-model:show="show" title="作品简介">
-      <div class="content">内容</div>
-
-      <router-link to="/hellovideo/home">
-        <Button>查看Demo</Button>
-      </router-link>
-    </action-sheet>
   </div>
+
+  <div class="bottom">
+    <p>
+      <a href="https://bishaoxia.gitee.io" target="_blank">
+        <Button type="primary" size="mini">也欢迎访问我的博客（点我访问）</Button>
+      </a>
+    </p>
+    <p class="tips">
+      *推荐使用移动端进行体验<br />
+      *首页符合格子衫程序员的审美
+    </p>
+  </div>
+  <action-sheet v-model:show="show" title="作品简介">
+    <div class="sheet">
+      <p class="title">{{current.name}}</p>
+      <section class="section">
+        <div class="left">介绍：</div>
+        <div class="right">{{current.notes}}</div>
+      </section>
+      <section class="section">
+        <div class="left">技术点：</div>
+        <div class="right">{{current.content}}</div>
+      </section>
+    </div>
+    <p class="center">
+      <router-link :to="current.link">
+        <Button type="primary">进入Demo</Button>
+      </router-link>
+    </p>
+  </action-sheet>
 </template>
 
 <script>
+import { ref, reactive, toRefs } from 'vue'
 import { Button, ActionSheet } from "vant";
 // import 'vant/lib/button/style';
+
+const buttons = [
+  {
+    type: 'warning',
+    name: '音乐拼图游戏',
+    link: '/musicparty/home',
+    notes: '这是一个音乐合成小游戏，将多个乐器组成一段合奏。',
+    content: '使用了howler进行音频合成'
+  },
+  {
+    type: 'success',
+    name: '接音符游戏',
+    link: '/thanksgive/home',
+    content: '一个接音符的小游戏。<br/>技术点：使用hilojs + canvas进行制作；保证不同屏幕尺寸下的公平性'
+  },
+  {
+    type: 'danger',
+    name: 'web伪横屏视频',
+    link: '/hellovideo/home',
+    content: '介绍：原生video封装的互动视频播放器，含有指定时间节点进行交互。<br/>技术点：Android尝试使用全屏事件，IOS进行旋转90度伪横屏处理'
+  },
+]
 
 export default {
   components: {
@@ -43,56 +98,27 @@ export default {
     ActionSheet
   },
   setup() {
+    const data = reactive({ 
+      show: false,
+      current: {}
+    });
+
+    const showSheet = (item) => {
+      data.current = item;
+      data.show = true;
+    }
     return {
       text: "text",
+      show: ref(false),
+      buttons: reactive(buttons),
+      ...toRefs(data),
+      showSheet,
     };
   },
 };
 </script>
 
-<style lang="scss" scoped>
-.background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fattachments.gfan.com%2Fforum%2F201503%2F23%2F205237dm9mft2ml2dlgl8l.jpg&refer=http%3A%2F%2Fattachments.gfan.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1617790598&t=1f70c37ea7ce1b9d36b9e6e5dfaaabd3") center center no-repeat;
-    background-size: cover;
-    z-index: -1;
-  }
-.wrapper {
-  box-shadow: 0 0.3px 0.7px rgba(0, 0, 0, 0.126),
-    0 0.9px 1.7px rgba(0, 0, 0, 0.179), 0 1.8px 3.5px rgba(0, 0, 0, 0.224),
-    0 3.7px 7.3px rgba(0, 0, 0, 0.277), 0 10px 20px rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(20px);
-
-  
-}
-.main {
-  text-align: center;
-  padding: 50px 10px 20px;
-  .title {
-    line-height: 60px;
-    font-size: 45px;
-    color: #2c3e50;
-  }
-  .title-2 {
-    line-height: 60px;
-    margin-bottom: 20px;
-    font-size: 35px;
-    color: #6a8bad;
-  }
-  .tips {
-    font-size: 25px;
-    color: #696969;
-  }
-}
-/* .text {
-  font-size: 20px;
-  width: 375px;
-  height: 200px;
-  line-height: 200px;
-  background-color: cadetblue;
-} */
+<style lang="scss" src="./anim.stand.scss">
+</style>
+<style lang="scss" src="./home.stand.scss" scoped>
 </style>

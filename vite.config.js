@@ -44,6 +44,11 @@ export default {
     // sourcemap: false,
     // manifest: false
   },
+  /**
+   * 在生产中服务时的基本公共路径。
+   * @default '/'
+   */
+  base: './',
   // 服务端渲染
   ssr: false,
 }

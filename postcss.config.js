@@ -10,7 +10,7 @@ module.exports = {
         replace: true, //这个真不知到干嘛用的。有知道的告诉我一下
         mediaQuery: false, //媒体查询( @media screen 之类的)中不生效
         minPixelValue: 2, //px小于的不会被转换
-        exclude: /node_modules|reset\.css|app\.css/i
+        exclude: /node_modules|reset\.css|app\.css|\.stand\.scss/i
     }
   }
 }
