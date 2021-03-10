@@ -52,7 +52,7 @@
           class="ins-first"
           label="learnFirst"
           @moveing="itemMoving"
-          @moveEnd="itemMoveEnd"
+          @moveend="itemMoveEnd"
         >
         </party-ins>
 
@@ -83,7 +83,7 @@
 </template>
 
 <script>
-import { watch, ref, reactive } from "vue";
+import { watch, ref, reactive, toRefs } from "vue";
 import LayoutParty from "./layout/Party.vue";
 import PartyIns from "./PartyIns.vue";
 import PartyBoy from "./PartyBoy.vue";
@@ -101,70 +101,72 @@ export default {
   },
   emits: ['step'],
   setup(props, context) {
+    const data = reactive({
     // 新手引导当前步骤
-    const stepCurrent = ref(0);
-    const learnBoy = reactive({
-      index: 4,
-      isHit: false,
-      skin: ""
-    });
-    const learnAha = reactive({
-      isSong: false
+      stepCurrent: 0,
+      learnBoy: {
+        index: 4,
+        isHit: false,
+        skin: ""
+      },
+      learnAha: {
+        isSong: false
+      }
     });
 
     const notify = () => {
       context.emit(
         'step',
-        stepCurrent.value,
-        { ...learnBoy },
-        { ...learnAha },
+        data.stepCurrent,
+        { ...data.learnBoy },
+        { ...data.learnAha },
       );
     }
 
     // 按钮 下一步
     const nextStep = () => {
-      if (stepCurrent.value === 0) {
+      if (data.stepCurrent === 0) {
         notify();
-      } else if (stepCurrent.value === 1) {
-        learnBoy.skin = "diangangqin";
+      } else if (data.stepCurrent === 1) {
+        data.learnBoy.skin = "diangangqin";
         notify();
-      } else if (stepCurrent.value === 2) {
-        learnBoy.skin = "";
+      } else if (data.stepCurrent === 2) {
+        data.learnBoy.skin = "";
         notify();
-      } else if (stepCurrent.value === 3) {
-        learnAha.isSong = true;
+      } else if (data.stepCurrent === 3) {
+        data.learnAha.isSong = true;
         notify();
       }
-      stepCurrent.value = Math.min(stepCurrent.value + 1, 3);
+      data.stepCurrent = Math.min(data.stepCurrent + 1, 3);
     }
 
     const removeSkin = () => {
-      if (stepCurrent.value === 2) {
+      if (data.stepCurrent === 2) {
         nextStep();
       }
     }
 
     const RefsHits = ref(null);
     const itemMoving = (name, clientX, clientY) => {
-      learnBoy.isHit = hitTestBox(RefsHits, clientX, clientY);
+      data.learnBoy.isHit = hitTestBox(RefsHits.value, clientX, clientY);
     }
     const itemMoveEnd = (name) => {
-      if (learnBoy.isHit && stepCurrent.value === 1) {
+      if (data.learnBoy.isHit && data.stepCurrent === 1) {
         nextStep();
       }
-      learnBoy.isHit = false;
+      data.learnBoy.isHit = false;
     }
 
     const skipLearn = () => {
-      stepCurrent.value = 3;
+      data.stepCurrent = 3;
       nextStep();
     }
 
     watch(() => props.visible, (val) => {
       if (val) {
-        stepCurrent.value = 0;
-        learnBoy.skin = "";
-        learnAha.isSong = false;
+        data.stepCurrent = 0;
+        data.learnBoy.skin = "";
+        data.learnAha.isSong = false;
         nextStep();
       }
     }, {
@@ -172,11 +174,8 @@ export default {
     });
 
     return {
-      theme: props.theme,
       RefsHits,
-      stepCurrent,
-      learnBoy,
-      learnAha,
+      ...toRefs(data),
       removeSkin,
       itemMoving,
       itemMoveEnd,

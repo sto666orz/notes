@@ -38,8 +38,8 @@ export default {
       if (!props.skin) return;
       const touches = event.targetTouches[0];
       if (
-        touches.clientX - this.startX <= 20 &&
-        touches.clientY - this.startY >= 30
+        touches.clientX - startX.value <= 20 &&
+        touches.clientY - startY.value >= 30
       ) {
         context.emit("slideDown");
       }

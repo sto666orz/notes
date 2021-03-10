@@ -1,34 +1,153 @@
-/* .background {
+@keyframes move {
+  100% {
+    transform: translate3d(0, 0, 1px) rotate(360deg);
+  }
+}
+@keyframes scale {
+  0% {
+    transform: scale(1, 1);
+  }
+  50% {
+    transform: scale(1.2, 1.2);
+  }
+  100% {
+    transform: scale(0.9, 0.9);
+  }
+}
+.holder-bottom {
+  overflow: hidden;
+  .tips {
+    animation: scale 3s ease-in-out alternate infinite;
+  }
+}
+
+.background {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: url("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fattachments.gfan.com%2Fforum%2F201503%2F23%2F205237dm9mft2ml2dlgl8l.jpg&refer=http%3A%2F%2Fattachments.gfan.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1617790598&t=1f70c37ea7ce1b9d36b9e6e5dfaaabd3") center center no-repeat;
-  background-size: cover;
   z-index: -1;
-} */
+  background: #f9faff;
+  // background: #3E1E68;
+  span {
+    width: 20vmin;
+    height: 20vmin;
+    border-radius: 20vmin;
+    backface-visibility: hidden;
+    position: absolute;
+    animation-name: move;
+    animation-duration: 6s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+  span:nth-child(1) {
+    color: #FFACAC;
+    top: 44%;
+    left: 97%;
+    animation-duration: 15s;
+    animation-delay: -13.8s;
+    transform-origin: 11vw -22vh;
+    box-shadow: 40vmin 0 10.12735945vmin currentColor;
+  }
+  span:nth-child(2) {
+    color: #E45A84;
+    top: 93%;
+    left: 8%;
+    animation-duration: 13.8s;
+    animation-delay: -10.9s;
+    transform-origin: 10vw 23vh;
+    box-shadow: 40vmin 0 12.7346672971vmin currentColor;
+  }
+  span:nth-child(3) {
+    color: #FFACAC;
+    top: 14%;
+    left: 41%;
+    animation-duration: 15.9s;
+    animation-delay: -6.7s;
+    transform-origin: -9vw -24vh;
+    box-shadow: -40vmin 0 11.4923952406vmin currentColor;
+  }
+  span:nth-child(4) {
+    color: #E45A84;
+    top: 52%;
+    left: 75%;
+    animation-duration: 14.3s;
+    animation-delay: -12.6s;
+    transform-origin: 16vw 25vh;
+    box-shadow: 40vmin 0 13.3657534039vmin currentColor;
+  }
+  span:nth-child(5) {
+    color: #FFACAC;
+    top: 7%;
+    left: 5%;
+    animation-duration: 15.9s;
+    animation-delay: -10s;
+    transform-origin: 8vw 3vh;
+    box-shadow: -40vmin 0 13.3942178273vmin currentColor;
+  }
+  span:nth-child(6) {
+    color: #FFACAC;
+    top: 35%;
+    left: 1%;
+    animation-duration: 11.6s;
+    animation-delay: -6s;
+    transform-origin: 0vw 17vh;
+    box-shadow: -40vmin 0 7.6304875279vmin currentColor;
+  }
+  span:nth-child(7) {
+    color: #FFACAC;
+    top: 42%;
+    left: 84%;
+    animation-duration: 11s;
+    animation-delay: -6.9s;
+    transform-origin: 11vw -8vh;
+    box-shadow: 40vmin 0 13.6665321499vmin currentColor;
+  }
+  span:nth-child(8) {
+    color: #E45A84;
+    top: 53%;
+    left: 95%;
+    animation-duration: 15s;
+    animation-delay: -10.9s;
+    transform-origin: 25vw 15vh;
+    box-shadow: 40vmin 0 13.2849881717vmin currentColor;
+  }
+  span:nth-child(9) {
+    color: #FFACAC;
+    top: 75%;
+    left: 67%;
+    animation-duration: 11.7s;
+    animation-delay: -13.9s;
+    transform-origin: -11vw -3vh;
+    box-shadow: 40vmin 0 7.2158804055vmin currentColor;
+  }
+  span:nth-child(10) {
+    color: #583C87;
+    top: 59%;
+    left: 51%;
+    animation-duration: 12.1s;
+    animation-delay: -11.7s;
+    transform-origin: -5vw -7vh;
+    box-shadow: -40vmin 0 7.4269772253vmin currentColor;
+  }
+}
+
 
 .wrapper {
   position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
 }
 .main {
-  /* box-shadow: 0 0.3px 0.7px rgba(0, 0, 0, 0.126),
-    0 0.9px 1.7px rgba(0, 0, 0, 0.179), 0 1.8px 3.5px rgba(0, 0, 0, 0.224),
-    0 3.7px 7.3px rgba(0, 0, 0, 0.277), 0 10px 20px rgba(0, 0, 0, 0.4); */
-  background-color: rgba(255, 255, 255, 0.75);
-  backdrop-filter: blur(20px);
   text-align: center;
-  width: 90%;
-  padding: 50px 10px;
-  margin-bottom: 35px;
+  padding: 20px 10px;
+  .to-blog {
+    display: block;
+    text-align: right;
+    margin-bottom: 20px;
+  }
   .title {
-    line-height: 50px;
-    font-size: 25px;
+    line-height: 48px;
+    font-size: 24px;
     color: #011122;
   }
   .title-2 {
@@ -54,8 +173,6 @@
   right: 0;
   bottom: 0;
   padding: 10px;
-  background-color: #ffffff;
-  border-radius: 25px 25px 0 0;
   .tips {
     margin-top: 8px;
     line-height: 16px;
@@ -64,12 +181,11 @@
   }
 }
 .sheet {
-  padding: 30px 20px;
+  padding: 20px 20px 30px;
   .title {
-    text-align: center;
     font-size: 22px;
     font-weight: 600;
-    padding-bottom: 30px;
+    padding-bottom: 20px;
   }
   .section {
     display: flex;

@@ -13,6 +13,8 @@
 </template>
 
 <script>
+import { Notify } from 'vant';
+
 export default {
   props: {
     visible: Boolean,
@@ -21,11 +23,13 @@ export default {
   emits: ['update:visible', 'share'],
   setup(props, context) {
     const shareTo = () => {
-      context.emit('share');
+      // context.emit('share');
+      Notify({message: '分享需要公众号，所以没办法用。分享后的助力页面正在改造中....'});
     }
 
     const linkTo = (path) => {
-      console.log('linkTo', path);
+      Notify({message: '功能改造中....'});
+      // console.log('linkTo', path);
       /* this.$router.push({
         path: path,
         query: this.$route.query,
