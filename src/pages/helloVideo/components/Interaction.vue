@@ -401,7 +401,6 @@ export default {
         );
       });
 
-      console.log('loadAll', loadAll);
       Promise.all(loadAll)
         .then((res) => {
           if (

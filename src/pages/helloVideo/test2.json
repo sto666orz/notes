@@ -1,0 +1,72 @@
+[
+  {
+    "id": "0004",
+    "sno": "0000004",
+    "title": "Demo问题4",
+    "question_type": 0,
+    "options_order": 0,
+    "question_stem": [
+      {
+        "stem_type": 1,
+        "stem_content": "第四个问题的题干（音频问题），选出方框内节奏的正确组合方式"
+      },
+      {
+        "stem_type": 3,
+        "stem_content": "https://tests001.pnlyy.com/mb/vXkbG9bt6VxLvQi0cAMPxmKR6JyhKDcK22.mp3"
+      }
+    ],
+    "question_analysis": [
+      {
+        "analysis_type": 1,
+        "analysis_content": "问题解析（音频解析）：在6/8拍中，是以八分音符为一拍，每小节有六拍，强弱规律的是强弱弱，次强弱弱，我们在音值组合的时候，将整个小节分为两组音群，将第1第2第3拍组合在一起，将第4第5第6拍组合在一起，按照这种组合方式，所以选择第一个选项"
+      }
+    ],
+    "question_option": [
+      {
+        "is_answer": true,
+        "option_text": "我是第一题正确答案",
+        "option_img": "https://tests001.pnlyy.com/mb/vXkbG9bt6VxLvQi0cAMPxmKR6JyhKDcK21-1.png"
+      },
+      {
+        "is_answer": false,
+        "option_text": "我是错误答案，选我能看到错题解析",
+        "option_img": "https://tests001.pnlyy.com/mb/vXkbG9bt6VxLvQi0cAMPxmKR6JyhKDcK21-2.png"
+      }
+    ]
+  },
+  {
+    "id": "75878928740798873",
+    "sno": "92775",
+    "title": "Demo问题5的标题",
+    "question_type": 0,
+    "options_order": 1,
+    "question_stem": [
+      {
+        "stem_type": 1,
+        "stem_content": "这是还一个带图片的问题"
+      },
+      {
+        "stem_type": 2,
+        "stem_content": "https://tests001.pnlyy.com/FbZ0e1kGNoylzTZ831bRA9P8aOIklL5dwaterMark.jpg"
+      }
+    ],
+    "question_analysis": [
+      {
+        "analysis_type": 1,
+        "analysis_content": "问题的解析，问题的解析，问题的解析，问题的解析，问题的解析，问题的解析，问题的解析，问题的解析，问题的解析，问题的解析，问题的解析，问题的解析。"
+      }
+    ],
+    "question_option": [
+      {
+        "is_answer": true,
+        "option_img": "",
+        "option_text": "我是第二题正确答案"
+      },
+      {
+        "is_answer": false,
+        "option_img": "",
+        "option_text": "我是错误答案，选我能看到问题解析"
+      }
+    ]
+  }
+]

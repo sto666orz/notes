@@ -1,5 +1,9 @@
 <template>
-  <div class="hello-video" :style="`font-size: ${fontSize}px`">
+  <div 
+    class="hello-video"
+    ref="helloScreenRef"
+    :style="`font-size: ${fontSize}px`"
+  >
     <div class="hello-thumb" @click="tryFullScreen()">
       <img :src="thumb" class="thumb-cover" />
       <img
@@ -11,7 +15,6 @@
     <div
       v-if="fullScreen"
       class="hello-screen"
-      ref="helloScreenRef"
       @touchstart="sandClockControl()"
       @touchmove="sandClockControl()"
       @touchend="sandClockControl()"
@@ -342,7 +345,7 @@ export default {
       video.addEventListener("ended", videoended);
       video.addEventListener("waiting", videowaiting);
 
-      onBeforeUnmount(() => {
+      /* onBeforeUnmount(() => {
         video.removeEventListener("loadedmetadata", loadedmetadata);
         video.removeEventListener("durationchange", durationchange);
         video.removeEventListener("canplaythrough", canplaythrough);
@@ -351,7 +354,7 @@ export default {
         video.removeEventListener("pause", videopause);
         video.removeEventListener("ended", videoended);
         video.removeEventListener("waiting", videowaiting);
-      });
+      }); */
     }
 
     // 播放或暂停
@@ -839,7 +842,7 @@ export default {
     transform: rotate(0deg);
   }
 
-  .slide-enter,
+  .slide-enter-from,
   .slide-leave-to {
     opacity: 0.5;
     transform: translateY(100%);
