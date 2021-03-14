@@ -39,6 +39,13 @@
     <!-- 用于生成海报时候的遮罩 -->
     <div v-if="!showPoster" class="full-msak"></div>
   </div>
+  <div v-show="loading" class="pop-mask">
+    <img
+      class="loading-icon"
+      src="../../../assets/images/loading-icon.svg"
+      alt="载入中..."
+    />
+  </div>
 </template>
 
 <script>
@@ -66,6 +73,7 @@ export default {
       posterImageBase64: '',
       qrcodeImage: '',
       showPoster: false,
+      loading: false,
     });
 
     const againGame = () => {
@@ -89,6 +97,7 @@ export default {
     }
 
     const makePoster = () => {
+      data.loading = true;
       document.documentElement.scrollTop = document.body.scrollTop = 0;
       setTimeout(() => {
         const element = RefPoster.value;
@@ -114,11 +123,12 @@ export default {
           // canvas转换为base64
           data.posterImageBase64 = canvas.toDataURL("image/png");
           data.showPoster = true;
+          data.loading = false;
           /* this.$nextTick(() => {
             this.longTap();
           }); */
         });
-      }, 200);
+      }, 100);
     }
 
     /* const createQrcode = () => {
@@ -324,5 +334,21 @@ export default {
 
 .output {
   display: none;
+}
+
+.pop-mask {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999;
+  background-color: rgba(0, 0, 0, 0.7);
+  .loading-icon {
+    display: block;
+  }
 }
 </style>

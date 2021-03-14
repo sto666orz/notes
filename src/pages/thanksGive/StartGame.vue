@@ -16,7 +16,6 @@
       :missCount="missCount"
       :scoreTime="scoreTime"
       :playerRank="playerRank"
-      @complete=" ('此处应该closeLoding') "
       @againGame="againGame"
       @closeView="gameover = false"
     >
