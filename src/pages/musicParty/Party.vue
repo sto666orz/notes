@@ -43,14 +43,14 @@
           ></div>
         </div>
 
-        <party-ins
+        <PartyIns
           class="ins-first"
           label="first"
           :exclude="boysSkin"
           @moveing="itemMoving"
           @moveend="itemMoveEnd"
         >
-        </party-ins>
+        </PartyIns>
         <party-ins
           class="ins-second"
           label="second"
@@ -78,7 +78,14 @@
       @apply="composeMusic(true)"
     ></popup-ask>
 
-    <learn-game 
+    <popup-view 
+      v-model:visible="visibles.empty"
+      width="75%"
+    >
+      <div style="text-align:center;line-height:3rem">功能暂时关闭了</div>
+    </popup-view>
+
+    <learn-game
       v-model:visible="visibles.learn"
       :theme="theme"
       @step="nextLearn"
@@ -107,6 +114,7 @@ import { useRouter, useRoute } from 'vue-router';
 import LayoutParty from "./components/layout/Party.vue";
 import ActionGreat from "./components/ActionGreat.vue";
 
+import PopupView from "@components/PopupView.vue";
 import PopupAsk from "./components/PopupAsk.vue";
 import PartyIns from "./components/PartyIns.vue";
 import PartyBoy from "./components/PartyBoy.vue";
@@ -133,6 +141,7 @@ export default {
     PartyBoy,
     LearnGame,
     StageLoading,
+    PopupView,
   },
   setup(props) {
     const route = useRoute();
@@ -162,6 +171,7 @@ export default {
       learn: false, // 新手引导
       great: false, // 合成音乐弹窗
       share: false, // 分享弹窗
+      empty: false,
     });
 
     // 重新制作
@@ -278,7 +288,8 @@ export default {
     }
 
     const linkToLottery = () => {
-      console.log('linkToLottery');
+      // console.log('linkToLottery');
+      visibles.empty = true;
     }
 
     const shareView = () => {

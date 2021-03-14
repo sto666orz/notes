@@ -23,10 +23,11 @@ export default {
     width: String, // 非必选 宽度
     height: String, // 非必选 高度
   },
-  emits: ['close', 'open'],
+  emits: ['close', 'open', 'update:visible'],
   setup(props, context) {
 
     const closeView = () => {
+      context.emit('update:visible', false);
       context.emit('close', null);
     }
 
@@ -42,8 +43,6 @@ export default {
 
     return {
       closeView,
-      width2: props.width,
-      height: props.height,
     }
   }
 };
